@@ -1,0 +1,140 @@
+<!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Интерактивный коллаж</title></head><body style='margin:0;background:#fff'><div id="canva-collage-49" class="cc49">
+  <div class="cc49-stage">
+    <img class="cc49-main" alt="Коллаж" />
+    <div class="cc49-hotspots" aria-label="Кликабельные фотографии"></div>
+  </div>
+
+  <div class="cc49-modal" aria-hidden="true">
+    <button class="cc49-backdrop" type="button" aria-label="Закрыть окно"></button>
+    <div class="cc49-dialog" role="dialog" aria-modal="true" aria-labelledby="cc49-title">
+      <button class="cc49-close" type="button" aria-label="Закрыть">×</button>
+      <div class="cc49-crop">
+        <img class="cc49-crop-img" alt="" />
+      </div>
+      <div id="cc49-title" class="cc49-number"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+#canva-collage-49.cc49{width:100%;margin:0;padding:0;}
+#canva-collage-49 .cc49-stage{position:relative;width:100%;line-height:0;}
+#canva-collage-49 .cc49-main{display:block;width:100%;height:auto;margin:0;padding:0;border:0;}
+#canva-collage-49 .cc49-hotspots{position:absolute;inset:0;pointer-events:none;}
+#canva-collage-49 .cc49-hit{
+  position:absolute;display:block;border:0;padding:0;margin:0;background:transparent;
+  cursor:pointer;pointer-events:auto;-webkit-tap-highlight-color:transparent;
+}
+#canva-collage-49 .cc49-hit:focus-visible{outline:3px solid #111;outline-offset:2px;}
+#canva-collage-49.cc49-debug .cc49-hit{background:rgba(255,0,0,.18);outline:1px solid red;}
+#canva-collage-49 .cc49-modal{
+  position:fixed;inset:0;z-index:999999;display:none;align-items:center;justify-content:center;
+  padding:24px;box-sizing:border-box;
+}
+#canva-collage-49 .cc49-modal.is-open{display:flex;}
+#canva-collage-49 .cc49-backdrop{
+  position:absolute;inset:0;border:0;background:rgba(0,0,0,.76);cursor:pointer;
+}
+#canva-collage-49 .cc49-dialog{
+  position:relative;z-index:1;width:min(760px,94vw);max-height:92%;overflow:auto;
+  background:#fff;border-radius:16px;padding:18px;box-sizing:border-box;
+  box-shadow:0 18px 70px rgba(0,0,0,.28);
+}
+#canva-collage-49 .cc49-close{
+  position:absolute;right:10px;top:10px;z-index:3;width:44px;height:44px;border:0;
+  border-radius:50%;background:rgba(255,255,255,.94);font:32px/1 Arial,sans-serif;cursor:pointer;
+  box-shadow:0 2px 12px rgba(0,0,0,.18);
+}
+#canva-collage-49 .cc49-crop{
+  position:relative;width:100%;overflow:hidden;background:#eee;border-radius:10px;
+}
+#canva-collage-49 .cc49-crop-img{
+  position:absolute;max-width:none;margin:0;padding:0;border:0;display:block;
+}
+#canva-collage-49 .cc49-number{
+  padding:14px 4px 2px;text-align:center;font:600 20px/1.3 Arial,sans-serif;color:#111;
+}
+@media (max-width:640px){
+  #canva-collage-49 .cc49-modal{padding:12px;}
+  #canva-collage-49 .cc49-dialog{width:96vw;padding:12px;border-radius:12px;}
+  #canva-collage-49 .cc49-number{font-size:18px;}
+}
+</style>
+
+<script>
+(function(){
+  const root = document.getElementById('canva-collage-49');
+  if(!root || root.dataset.ready === '1') return;
+  root.dataset.ready = '1';
+
+  /* В Tilda замените только эту строку на URL загруженного макета: */
+  const IMAGE_URL = "maket.png";
+
+  /* Для проверки зон можно временно поменять false на true */
+  const DEBUG = false;
+
+  const hotspots = [{"n":1,"x":9.24479,"y":22.36328,"w":7.68229,"h":5.07812},{"n":2,"x":20.18229,"y":23.14453,"w":8.07292,"h":5.17578},{"n":3,"x":32.03125,"y":23.24219,"w":8.20312,"h":4.6875},{"n":4,"x":56.51042,"y":25.0,"w":6.77083,"h":6.93359},{"n":5,"x":66.01562,"y":25.19531,"w":8.72396,"h":4.19922},{"n":6,"x":77.34375,"y":25.29297,"w":7.8125,"h":5.17578},{"n":7,"x":87.89062,"y":25.39062,"w":7.29167,"h":5.76172},{"n":8,"x":6.77083,"y":31.83594,"w":12.89062,"h":2.83203},{"n":9,"x":22.65625,"y":34.08203,"w":13.67188,"h":5.46875},{"n":10,"x":39.19271,"y":35.64453,"w":4.42708,"h":3.71094},{"n":11,"x":9.50521,"y":39.35547,"w":14.45312,"h":6.25},{"n":12,"x":29.81771,"y":41.11328,"w":14.97396,"h":10.83984},{"n":13,"x":77.47396,"y":40.52734,"w":5.33854,"h":3.51562},{"n":14,"x":84.24479,"y":40.52734,"w":7.68229,"h":3.51562},{"n":15,"x":77.47396,"y":44.92188,"w":5.33854,"h":3.41797},{"n":16,"x":84.24479,"y":44.92188,"w":7.68229,"h":3.41797},{"n":17,"x":77.47396,"y":49.51172,"w":5.33854,"h":3.51562},{"n":18,"x":84.24479,"y":49.51172,"w":7.68229,"h":3.51562},{"n":19,"x":67.1875,"y":43.45703,"w":7.29167,"h":1.85547},{"n":20,"x":67.1875,"y":45.80078,"w":7.29167,"h":1.85547},{"n":21,"x":67.1875,"y":48.33984,"w":7.29167,"h":1.85547},{"n":22,"x":67.1875,"y":50.87891,"w":7.29167,"h":1.95312},{"n":23,"x":46.35417,"y":47.16797,"w":7.94271,"h":3.90625},{"n":24,"x":46.35417,"y":51.85547,"w":7.94271,"h":3.90625},{"n":25,"x":46.35417,"y":56.64062,"w":7.94271,"h":4.19922},{"n":26,"x":7.8125,"y":53.02734,"w":6.11979,"h":4.00391},{"n":27,"x":7.8125,"y":58.59375,"w":6.11979,"h":3.71094},{"n":28,"x":7.55208,"y":64.16016,"w":6.77083,"h":3.80859},{"n":29,"x":22.65625,"y":57.71484,"w":12.89062,"h":6.25},{"n":30,"x":19.66146,"y":63.86719,"w":5.72917,"h":4.49219},{"n":31,"x":30.07812,"y":63.96484,"w":6.90104,"h":4.6875},{"n":32,"x":36.71875,"y":56.64062,"w":7.16146,"h":3.02734},{"n":33,"x":57.03125,"y":54.10156,"w":6.25,"h":5.56641},{"n":34,"x":64.0625,"y":58.49609,"w":4.94792,"h":3.90625},{"n":35,"x":75.52083,"y":58.49609,"w":5.07812,"h":4.10156},{"n":36,"x":85.28646,"y":59.47266,"w":6.38021,"h":3.22266},{"n":37,"x":39.45312,"y":65.625,"w":3.51562,"h":3.02734},{"n":38,"x":44.53125,"y":65.625,"w":3.77604,"h":3.02734},{"n":39,"x":49.73958,"y":65.625,"w":4.16667,"h":3.02734},{"n":40,"x":6.11979,"y":74.02344,"w":7.03125,"h":4.6875},{"n":41,"x":18.09896,"y":75.19531,"w":11.84896,"h":3.90625},{"n":42,"x":34.76562,"y":73.73047,"w":6.64062,"h":4.58984},{"n":43,"x":44.40104,"y":72.94922,"w":3.38542,"h":3.22266},{"n":44,"x":48.82812,"y":72.94922,"w":3.38542,"h":3.22266},{"n":45,"x":53.51562,"y":72.94922,"w":3.38542,"h":3.22266},{"n":46,"x":58.46354,"y":72.94922,"w":3.38542,"h":3.22266},{"n":47,"x":63.67188,"y":72.94922,"w":3.38542,"h":3.22266},{"n":48,"x":68.88021,"y":72.94922,"w":3.38542,"h":3.22266},{"n":49,"x":74.08854,"y":72.94922,"w":3.38542,"h":3.22266}];
+  const main = root.querySelector('.cc49-main');
+  const layer = root.querySelector('.cc49-hotspots');
+  const modal = root.querySelector('.cc49-modal');
+  const crop = root.querySelector('.cc49-crop');
+  const cropImg = root.querySelector('.cc49-crop-img');
+  const number = root.querySelector('.cc49-number');
+  const closeBtn = root.querySelector('.cc49-close');
+  const backdrop = root.querySelector('.cc49-backdrop');
+
+  if(DEBUG) root.classList.add('cc49-debug');
+
+  main.src = IMAGE_URL;
+  cropImg.src = IMAGE_URL;
+
+  hotspots.forEach((h, index) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'cc49-hit';
+    b.setAttribute('aria-label', 'Фото №' + h.n);
+    b.style.left = h.x + '%';
+    b.style.top = h.y + '%';
+    b.style.width = h.w + '%';
+    b.style.height = h.h + '%';
+    b.style.zIndex = String(100 + index);
+    b.addEventListener('click', () => openPhoto(h));
+    layer.appendChild(b);
+  });
+
+  function openPhoto(h){
+    const wf = h.w / 100;
+    const hf = h.h / 100;
+    const xf = h.x / 100;
+    const yf = h.y / 100;
+
+    const nw = main.naturalWidth || 1680;
+    const nh = main.naturalHeight || 2239;
+    const ratio = (wf * nw) / (hf * nh);
+
+    crop.style.aspectRatio = String(ratio);
+    cropImg.style.width = (100 / wf) + '%';
+    cropImg.style.height = 'auto';
+    cropImg.style.left = (-100 * xf / wf) + '%';
+    cropImg.style.top = (-100 * yf / hf) + '%';
+
+    number.textContent = '№' + h.n;
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden','false');
+    document.documentElement.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+
+  function closeModal(){
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden','true');
+    document.documentElement.style.overflow = '';
+  }
+
+  closeBtn.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', closeModal);
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+  });
+})();
+</script></body></html>
