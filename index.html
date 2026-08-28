@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Доска «Голубая лагуна»</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Onest:wght@400;500;600;700&display=swap">
+
+<style>
+:root {
+  --lagoon:#127cb8;
+  --lagoon-soft:#2b9fdb;
+  --cork:#9c6a2b;
+  --surface:#fffdf9;
+  --wall:#f5eddd;
+  --wall-hi:rgba(255,255,253,.55);
+  --ink:#1d2730;
+  --muted:#6f6357;
+  --line:#ded1b8;
+  --board-shadow:0 14px 26px rgba(72,52,22,.30);
+  --font-hand:"Caveat",ui-rounded,"Segoe Script",cursive;
+  --font-ui:"Onest",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --wall-grain:url("data:image/png;base64,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");
+  --wall-mottle:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYAAAAGACAYAAACkx7W/AAAEPUlEQVR42u3VQREAMAjAsDFPyEEI7tHBkUjop9GVD4B7vgQABgCAAQBgAAAYAAAGAIABAGAAABgAAAYAgAEAYAAAGAAABgCAAQBgAAAYAAAGAIABAGAAABgAAAYAgAEAYAAABgCAAQBgAAAYAAAGAIABAGAAABgAAAYAgAEAYAAAGAAABgCAAQBgAAAYAAAGAIABAGAAABgAAAYAgAEAYAAABgCAAQBgAAAYAAAGAIABAGAAABgAAAYAgAEAYAAAGAAABgCAAQBgAAAYAAAGAIABAGAAABgAAAYAgAEAYAAAGACAAQBgAAAYAAAGAIABAGAAABgAAAYAgAEAYAAAGAAABgCAAQBgAAAYAAAGAIABAGAAABgAAAYAgAEAYAAAGACAAQBgAAAYAAAGAIABAGAAABgAAAYAgAEAYAAAGAAABgCAAQBgAAAYAAAGAIABAGAAABgAAAYAgAEAYAAAGAAABgBgAAAYAAAGAIABAGAAABgAAAYAgAEAYAAAGAAABgCAAQBgAAAYAAAGAIABAGAAABgAAAYAgAEAYAAAGAAABgBgAAAYAAAGAIABAGAAABgAAAYAgAEAYAAAGAAABgCAAQBgAAAYAAAGAIABAGAAABgAAAYAgAEAYAAAGAAABgCAAQAYAAAGAIABAGAAABgAAAYAgAEAYAAAGAAABgCAAQBgAAAYAAAGAIABAGAAABgAAAYAgAEAYAAAGAAABgCAAQAYAAAGAIABAGAAABgAAAYAgAEAYAAAGAAABgCAAQBgAAAYAAAGAIABAGAAABgAAAYAgAEAYAAAGAAABgCAAQBgAAAGAIABAGAAABgAAAYAgAEAYAAAGAAABgCAAQBgAAAYAAAGAIABAGAAABgAAAYAgAEAYAAAGAAABgCAAQBgAAAGAIABAGAAABgAAAYAgAEAYAAAGAAABgCAAQBgAAAYAAAGAIABAGAAABgAAAYAgAEAYAAAGAAABgCAAQBgAAAGIAGAAQBgAAAYAAAGAIABAGAAABgAAAYAgAEAYAAAGAAABgCAAQBgAAAYAAAGAIABAGAAABgAAAYAgAEAYAAAGACAAQBgAAAYAAAGAIABAGAAABgAAAYAgAEAYAAAGAAABgCAAQBgAAAYAAAGAIABAGAAABgAAAYAgAEAYAAAGACAAQBgAAAYAAAGAIABAGAAABgAAAYAgAEAYAAAGAAABgCAAQBgAAAYAAAGAIABAGAAABgAAAYAgAEAYAAAGAAABgBgAAAYAAAGAIABAGAAABgAAAYAgAEAYAAAGAAABgCAAQBgAAAYAAAGAIABAGAAABgAAAYAgAEAYAAAGAAABgBgAAAYAAAGAIABAGAAABgAAAYAgAEAYAAAGAAABgCAAQBgAAAYAAAGAIABAGAAABgAAAYAgAEAYAAAGAAABgCAAQAYAAAGAIABAGAAABgAAAYAgAEAsMkAKE0EC/YNI00AAAAASUVORK5CYII=");
+}
+
+* { box-sizing:border-box; }
+
+html, body { margin:0; min-height:100%; }
+
+body {
+  color:var(--ink);
+  background-color:var(--wall);
+  background-image:
+    var(--wall-grain),
+    var(--wall-mottle),
+    radial-gradient(140% 60% at 50% -8%, var(--wall-hi), transparent 62%);
+  background-size:96px 96px,384px 384px,100% 1100px;
+  background-repeat:repeat,repeat,no-repeat;
+  font-family:var(--font-hand);
+  font-size:20px;
+  line-height:1.42;
+  -webkit-font-smoothing:antialiased;
+}
+
+.wrap {
+  --pad:20px;
+  max-width:1180px;
+  margin:0 auto;
+  padding:34px var(--pad) 60px;
+  display:flex;
+  flex-direction:column;
+  gap:22px;
+}
+
+header {
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap:4px;
+  padding-inline:52px;
+}
+
+.eyebrow {
+  font-family:var(--font-ui);
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--cork);
+}
+
+h1 {
+  font-family:var(--font-hand);
+  font-weight:700;
+  font-size:clamp(38px,7vw,62px);
+  line-height:.95;
+  margin:0;
+  color:var(--ink);
+  text-wrap:balance;
+}
+
+.tools {
+  position:absolute;
+  right:0;
+  top:0;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+button {
+  font:700 18px/1 var(--font-hand);
+  color:var(--ink);
+  cursor:pointer;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:9px;
+  padding:9px 14px;
+  transition:background .15s,border-color .15s;
+}
+button:hover { border-color:var(--lagoon); }
+button:focus-visible { outline:2px solid var(--lagoon); outline-offset:2px; }
+
+button.icon {
+  width:36px;
+  height:36px;
+  padding:0;
+  border-radius:50%;
+  font-size:22px;
+  display:grid;
+  place-items:center;
+}
+
+/* The board itself sits directly on the wall — no white card around it. */
+.stage {
+  overflow-x:auto;
+  overflow-y:hidden;
+  padding-bottom:16px;
+  scrollbar-color:var(--line) transparent;
+}
+
+.board {
+  position:relative;
+  width:100%;
+  aspect-ratio:671.32 / 568.63;
+  overflow:visible;
+}
+
+/*
+  Current maket.png is the full 768×1024 Canva canvas.
+  The visible board corresponds to the same crop as the reference:
+  x≈0.78, y≈192.6, w≈767.22, h≈650.40.
+  We transform BOTH the image and hotspot layer together, preserving all 49 clicks.
+*/
+.canvas-full {
+  position:absolute;
+  width:100.101%;
+  height:157.442%;
+  left:-0.101%;
+  top:-29.612%;
+  filter:drop-shadow(var(--board-shadow));
+}
+
+.canvas-full > img {
+  position:absolute;
+  inset:0;
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:fill;
+  filter:none;
+}
+
+.hotspots {
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+
+.hotspot {
+  position:absolute;
+  border:0;
+  padding:0;
+  margin:0;
+  background:transparent;
+  cursor:pointer;
+  pointer-events:auto;
+  -webkit-tap-highlight-color:transparent;
+}
+.hotspot:focus-visible {
+  outline:2px solid var(--lagoon-soft);
+  outline-offset:1px;
+}
+
+.tagline {
+  margin:0 auto;
+  max-width:840px;
+  text-align:center;
+  font-weight:700;
+  font-size:clamp(24px,3.5vw,38px);
+  line-height:1.24;
+  color:#fff;
+  text-wrap:balance;
+}
+
+.keys { white-space:nowrap; }
+
+/* Mobile: keep board readable and allow horizontal scrolling exactly like reference. */
+@media (max-width:900px) {
+  .stage {
+    margin-inline:calc(-1 * var(--pad));
+    padding-inline:var(--pad);
+  }
+  .board { min-width:1000px; }
+}
+
+/* Desktop: the composition is meant to fit in one viewport. */
+@media (min-width:901px) and (min-height:520px) {
+  html { height:100%; }
+  body { height:100dvh; overflow:hidden; }
+  .wrap {
+    height:100%;
+    padding-top:14px;
+    padding-bottom:12px;
+    gap:8px;
+  }
+  .stage {
+    flex:1 1 auto;
+    min-height:0;
+    padding-bottom:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .board {
+    height:100%;
+    width:auto;
+    max-width:100%;
+    flex:0 0 auto;
+  }
+  h1 { font-size:min(clamp(38px,7vw,62px),7.2vh); }
+  .eyebrow { font-size:min(12px,1.5vh); }
+  .tagline {
+    font-size:min(clamp(24px,3.5vw,38px),3.6vh);
+    max-width:min(840px,72vw);
+  }
+}
+
+/* ---------- Photo dialog ---------- */
+dialog {
+  border:none;
+  padding:0;
+  width:calc(100% - 32px);
+  max-width:720px;
+  max-height:92vh;
+  overflow:auto;
+  border-radius:16px;
+  background:var(--surface);
+  color:var(--ink);
+  box-shadow:0 30px 70px -20px rgba(0,0,0,.60);
+}
+dialog::backdrop { background:rgba(20,15,8,.66); }
+dialog[open] { animation:rise .22s cubic-bezier(.2,.8,.3,1); }
+@keyframes rise {
+  from { opacity:0; transform:translateY(10px); }
+}
+
+.m-stage {
+  display:flex;
+  justify-content:center;
+  background:#0b0d10;
+}
+
+.m-frame {
+  position:relative;
+  display:inline-block;
+  max-width:100%;
+  margin:0;
+  line-height:0;
+}
+
+#media {
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+}
+
+.direct-photo {
+  display:block;
+  max-width:100%;
+  height:auto;
+  max-height:66vh;
+  object-fit:contain;
+  opacity:0;
+  transition:opacity .20s ease;
+}
+.direct-photo.ready { opacity:1; }
+
+.crop-wrap {
+  position:relative;
+  overflow:hidden;
+  max-width:100%;
+  background:#0b0d10;
+}
+.crop-wrap img {
+  position:absolute;
+  display:block;
+  max-width:none;
+  height:auto;
+}
+
+.m-scrim {
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  padding:64px 22px 16px;
+  line-height:1.25;
+  text-align:left;
+  background:linear-gradient(
+    transparent,
+    rgba(6,9,13,.55) 38%,
+    rgba(6,9,13,.93) 100%
+  );
+}
+
+.p-title {
+  font-family:var(--font-hand);
+  font-weight:700;
+  font-size:clamp(22px,3.4vw,28px);
+  color:#fff;
+  text-wrap:balance;
+}
+.p-text {
+  font-family:var(--font-hand);
+  font-size:clamp(18px,2.6vw,21px);
+  color:#dcd5cb;
+  margin-top:2px;
+  white-space:pre-wrap;
+}
+
+/* For genuinely tall direct photos, caption goes below the image. */
+.m-frame.tall .m-scrim {
+  position:static;
+  background:#0b0d10;
+  padding:14px 20px 18px;
+}
+
+.m-foot {
+  display:flex;
+  gap:8px;
+  padding:12px 24px 22px;
+}
+.m-foot .close {
+  margin-left:auto;
+  background:var(--lagoon);
+  border-color:var(--lagoon);
+  color:#fff;
+}
+.m-foot .close:hover {
+  background:var(--lagoon-soft);
+  border-color:var(--lagoon-soft);
+}
+
+/* ---------- Help dialog ---------- */
+#help-box { max-width:450px; }
+
+.m-head {
+  display:flex;
+  align-items:flex-start;
+  gap:14px;
+  padding:22px 24px 12px;
+}
+.m-num {
+  flex:none;
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  background:var(--lagoon);
+  color:#fff;
+  display:grid;
+  place-items:center;
+  font-weight:700;
+  font-size:26px;
+}
+.m-kicker {
+  font-family:var(--font-ui);
+  font-size:14px;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.m-title {
+  font-weight:700;
+  font-size:22px;
+  line-height:1.24;
+}
+.m-body {
+  padding:0 24px 20px;
+  white-space:normal;
+}
+#help-box ul {
+  margin:0;
+  padding-left:22px;
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+kbd {
+  font:700 15px/1 var(--font-hand);
+  background:var(--wall);
+  border:1px solid var(--line);
+  border-bottom-width:2px;
+  border-radius:5px;
+  padding:3px 6px;
+  color:var(--ink);
+}
+
+@media (prefers-reduced-motion:reduce) {
+  dialog[open] { animation:none; }
+  .direct-photo,button { transition:none; }
+}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Лагерь «Орлёнок» · летняя смена</div>
+    <h1>Отряд «Голубая лагуна»</h1>
+    <div class="tools">
+      <button id="help" class="icon" aria-label="Про наш отрядный уголок">?</button>
+    </div>
+  </header>
+
+  <div class="stage">
+    <div class="board">
+      <div class="canvas-full">
+        <img src="maket.png" alt="Пробковая доска с фотографиями отряда">
+        <div class="hotspots" id="hotspots"></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="tagline">
+    У каждого фото — своя история. Если вы ещё не слышали<br>
+    про <span class="keys">русалок из Голубой лагуны</span>, самое время познакомиться!
+  </p>
+</div>
+
+<dialog id="modal">
+  <div class="m-stage">
+    <figure class="m-frame" id="frame">
+      <div id="media"></div>
+      <figcaption class="m-scrim">
+        <div class="p-title" id="p-title"></div>
+        <div class="p-text" id="p-text"></div>
+      </figcaption>
+    </figure>
+  </div>
+  <div class="m-foot">
+    <button id="prev">← Назад</button>
+    <button id="next">Вперёд →</button>
+    <button class="close" id="close">Закрыть</button>
+  </div>
+</dialog>
+
+<dialog id="help-box">
+  <div class="m-head">
+    <div class="m-num">?</div>
+    <div>
+      <div class="m-kicker">Голубая лагуна</div>
+      <div class="m-title">
+        Это наш отрядный уголок. И мы готовы поделиться своей историей с вами.
+      </div>
+    </div>
+  </div>
+  <div class="m-body">
+    <ul>
+      <li>За смену мы собрали множество фотографий с каждого этапа.
+        Нажми, чтобы узнать историю, стоящую за снимком.</li>
+      <li>Внутри листается стрелками
+        <span class="keys"><kbd>←</kbd> <kbd>→</kbd></span>,
+        закрывается на <kbd>Esc</kbd>.</li>
+      <li>На телефоне доска листается вбок.</li>
+    </ul>
+  </div>
+  <div class="m-foot">
+    <button class="close" id="help-close">Понятно</button>
+  </div>
+</dialog>
+
+<script>
+const items=[{"n":1,"x":9.244792,"y":22.363281,"w":7.682292,"h":5.078125,"src":"photo-01.png"},{"n":2,"x":20.182292,"y":23.144531,"w":8.072917,"h":5.175781,"src":"photo-02.jpg"},{"n":3,"x":32.03125,"y":23.242188,"w":8.203125,"h":4.6875,"src":"photo-03.jpg"},{"n":4,"x":56.510417,"y":25.0,"w":6.770833,"h":6.933594,"src":"photo-04.jpg"},{"n":5,"x":66.015625,"y":25.195312,"w":8.723958,"h":4.199219,"src":"photo-05.png"},{"n":6,"x":77.34375,"y":25.292969,"w":7.8125,"h":5.175781,"src":"photo-06.jpg"},{"n":7,"x":87.890625,"y":25.390625,"w":7.291667,"h":5.761719,"src":"photo-07.jpg"},{"n":8,"x":6.770833,"y":31.835938,"w":12.890625,"h":2.832031,"src":"photo-08.jpg"},{"n":9,"x":22.65625,"y":34.082031,"w":13.671875,"h":5.46875,"src":"photo-09.jpg"},{"n":10,"x":39.192708,"y":35.644531,"w":4.427083,"h":3.710938,"src":"photo-10.jpg"},{"n":11,"x":9.505208,"y":39.355469,"w":14.453125,"h":6.25,"src":"photo-11.jpg"},{"n":12,"x":29.817708,"y":41.113281,"w":14.973958,"h":10.839844,"src":"photo-12.jpg"},{"n":13,"x":77.473958,"y":40.527344,"w":5.338542,"h":3.515625,"src":"photo-13.png","crop":{"x":320,"y":23,"w":260,"h":237,"sw":900,"sh":917}},{"n":14,"x":84.244792,"y":40.527344,"w":7.682292,"h":3.515625,"src":"photo-14.png","crop":{"x":427,"y":34,"w":345,"h":315,"sw":1200,"sh":1226}},{"n":15,"x":77.473958,"y":44.921875,"w":5.338542,"h":3.417969,"src":"photo-15.png","crop":{"x":320,"y":288,"w":260,"h":238,"sw":900,"sh":917}},{"n":16,"x":84.244792,"y":44.921875,"w":7.682292,"h":3.417969,"src":"photo-16.png","crop":{"x":427,"y":389,"w":345,"h":315,"sw":1200,"sh":1226}},{"n":17,"x":77.473958,"y":49.511719,"w":5.338542,"h":3.515625,"src":"photo-17.png","crop":{"x":320,"y":553,"w":260,"h":237,"sw":900,"sh":917}},{"n":18,"x":84.244792,"y":49.511719,"w":7.682292,"h":3.515625,"src":"photo-18.png","crop":{"x":427,"y":742,"w":345,"h":316,"sw":1200,"sh":1226}},{"n":19,"x":67.1875,"y":43.457031,"w":7.291667,"h":1.855469,"src":"photo-19.png"},{"n":20,"x":67.1875,"y":45.800781,"w":7.291667,"h":1.855469,"src":"photo-20.png"},{"n":21,"x":67.1875,"y":48.339844,"w":7.291667,"h":1.855469,"src":"photo-21.png"},{"n":22,"x":67.1875,"y":50.878906,"w":7.291667,"h":1.953125,"src":"photo-22.png"},{"n":23,"x":46.354167,"y":47.167969,"w":7.942708,"h":3.90625,"src":"photo-23.jpg"},{"n":24,"x":46.354167,"y":51.855469,"w":7.942708,"h":3.90625,"src":"photo-24.jpg"},{"n":25,"x":46.354167,"y":56.640625,"w":7.942708,"h":4.199219,"src":"photo-25.jpg"},{"n":26,"x":7.8125,"y":53.027344,"w":6.119792,"h":4.003906,"src":"photo-26.jpg"},{"n":27,"x":7.8125,"y":58.59375,"w":6.119792,"h":3.710938,"src":"photo-27.jpg"},{"n":28,"x":7.552083,"y":64.160156,"w":6.770833,"h":3.808594,"src":"photo-28.jpg"},{"n":29,"x":22.65625,"y":57.714844,"w":12.890625,"h":6.25,"src":"photo-29.jpg"},{"n":30,"x":19.661458,"y":63.867188,"w":5.729167,"h":4.492188,"src":"photo-30.jpg"},{"n":31,"x":30.078125,"y":63.964844,"w":6.901042,"h":4.6875,"src":"photo-31.jpg"},{"n":32,"x":36.71875,"y":56.640625,"w":7.161458,"h":3.027344,"src":"photo-32.jpg"},{"n":33,"x":57.03125,"y":54.101562,"w":6.25,"h":5.566406,"src":"photo-33.png"},{"n":34,"x":64.0625,"y":58.496094,"w":4.947917,"h":3.90625,"src":"photo-34.jpg"},{"n":35,"x":75.520833,"y":58.496094,"w":5.078125,"h":4.101562,"src":"photo-35.jpg"},{"n":36,"x":85.286458,"y":59.472656,"w":6.380208,"h":3.222656,"src":"photo-36.jpg"},{"n":37,"x":39.453125,"y":65.625,"w":3.515625,"h":3.027344,"src":"photo-37.jpg"},{"n":38,"x":44.53125,"y":65.625,"w":3.776042,"h":3.027344,"src":"photo-38.jpg"},{"n":39,"x":49.739583,"y":65.625,"w":4.166667,"h":3.027344,"src":"photo-39.jpg"},{"n":40,"x":6.119792,"y":74.023438,"w":7.03125,"h":4.6875,"src":"photo-40.jpg"},{"n":41,"x":18.098958,"y":75.195312,"w":11.848958,"h":3.90625,"src":"photo-41.jpg"},{"n":42,"x":34.765625,"y":73.730469,"w":6.640625,"h":4.589844,"src":"photo-42.jpg"},{"n":43,"x":44.401042,"y":72.949219,"w":3.385417,"h":3.222656,"src":"photo-43.jpg"},{"n":44,"x":48.828125,"y":72.949219,"w":3.385417,"h":3.222656,"src":"photo-44.jpg"},{"n":45,"x":53.515625,"y":72.949219,"w":3.385417,"h":3.222656,"src":"photo-45.jpg"},{"n":46,"x":58.463542,"y":72.949219,"w":3.385417,"h":3.222656,"src":"photo-46.jpg"},{"n":47,"x":63.671875,"y":72.949219,"w":3.385417,"h":3.222656,"src":"photo-47.png"},{"n":48,"x":68.880208,"y":72.949219,"w":3.385417,"h":3.222656,"src":"photo-48.jpg"},{"n":49,"x":74.088542,"y":72.949219,"w":3.385417,"h":3.222656,"src":"photo-49.jpg"}];
+const TITLES={"1":"Посвящение в отряд","2":"Наш маленький обряд","3":"Костровая площадка","4":"На вечеринке","5":"В Сицилии","6":"На кухне 6 отряда","7":"Поварихи","8":"Отряд «Голубая лагуна»","9":"Соревнования по спортивному лежанию","10":"Наш маленький обряд","11":"Вечер на костровой","12":"«Все любят Беату»","13":"Вечер в русалочьем домике","14":"Первая проба воды","15":"Вечер в русалочьем домике","16":"Первая проба воды","17":"Вечер в русалочьем домике","18":"Первая проба воды","19":"С флагом","20":"С флагом","21":"И ещё раз с флагом","22":"На память","23":"Вечеринка","24":"Общее фото","25":"Вечеринка, третий этап «Песочница»","26":"Наша комната","27":"Костровое место третьего отряда","28":"Ленивый флешмоб!","29":"Blue Lagoon After Dark","30":"DJ Габи","31":"Элайза и Лукреция","32":"Наше вдохновение","33":"Джулиан","34":"Морт","35":"Венди Гренуй","36":"I just wanna be part of your symphony…","37":"Соревнование по лежанию","38":"Любимый берег","39":"Ловим вампиров с шестым отрядом","40":"Ве-че-рин-ка","41":"Запеканочная лихорадка","42":"Ленивый флешмоб и соревнование по лежанию","43":"Gabriela Garcia-de-Nile","44":"Венди Гренуй","45":"Элайза Блекфорд","46":"Лукреция Блекфорд","47":"Беата ЛаВей","48":"Ханна Тёрнер","49":"Dina Lee"};
+const DESCRIPTIONS={"1":"Искали ракушки на дне озёрном. Вода тёплая! Первый этап.","2":"Создали ожерелья из найденных ракушек. Первый совместный вечер!","3":"Обустроили своё местечко. Застолбили берег раньше мальчишек!","4":"Джулиан и Морт с DJ Габи.","5":"Шутка. Или нет?","6":"Искали вампиров. Ханну покусали! (не точно)","7":"Готовили запеканки по рецепту первого отряда.","8":"Легендарный флаг.","9":"Мы сражались до последнего! Победила дружба (Ханна).","10":"Создали ожерелья из найденных ракушек. Первый совместный вечер!","11":"Жарили зефир и картошку (потому что Би не ест сладкое).","12":"Это цитата!","13":"Собирали ожерелья, болтали о своём, о девичьем.","14":"Венди, Лу, Габи.","15":"Собирали ожерелья, болтали о своём, о девичьем.","16":"Венди, Лу, Габи.","17":"Собирали ожерелья, болтали о своём, о девичьем.","18":"Венди, Лу, Габи.","19":"«Ну модели!»","20":"«Ну модели!»","21":"Притворяемся, что на курорте.","22":"«Прикройте ноги, стыд!»","23":"Почти все в сборе, DJ налагунилась.","24":"Вечеринка на берегу. Конец смены.","25":"Кто налагунился?","26":"Здесь живут русалки.","27":"Голубая лагуна и подушки для комфорта.","28":"Второй этап, самый лучший!","29":"Легендарная вечеринка.","30":"Спасибо, что подменила мистера Мора.","31":"В великолепных (и очень этичных) костюмах бабочек.","32":"Первый референс нашей Лагуны.","33":"Он же Беата ЛаВей.","34":"Он же Ханна Тёрнер.","35":"Потрясающий костюм, скажите?","36":"Об этой части истории вам знать не обязательно.","37":"Габи и Лу боролись до конца.","38":"Сколько незабываемых вечеров здесь проведено…","39":"Ханна всё ещё дурит нас.","40":"После «Голубая лагуна»-понг… Вроде, после… По лицам видно.","41":"«Я стираю ваши панталоны!» — «И с таким довольным лицом!»","42":"Отдыхаем. Можем себе позволить.","43":"Наш любимый DJ и улыбака, настоящая (честно!) принцесса.","44":"Пришла первая на бой с вампирами! Контролёр нашей дурости.","45":"Амбассадор модных луков.","46":"Ответственная за разрывные кадры.","47":"Доводила Сэма Кинза до белого каления всю смену и получила две короны.","48":"Наша зажигалочка. За любой движ — и в огонь, и в воду.","49":"Роутер смеха и веселья. Очень хотела купаться и купальник из ракушек. А где оно всё…"};
+
+const TOTAL=items.length;
+const layer=document.getElementById('hotspots');
+const modal=document.getElementById('modal');
+const helpBox=document.getElementById('help-box');
+const media=document.getElementById('media');
+const frame=document.getElementById('frame');
+const elTitle=document.getElementById('p-title');
+const elText=document.getElementById('p-text');
+let current=1;
+
+items.forEach(h=>{
+  const b=document.createElement('button');
+  b.type='button';
+  b.className='hotspot';
+  b.setAttribute('aria-label',TITLES[h.n] || ('Фото №'+h.n));
+  b.style.left=h.x+'%';
+  b.style.top=h.y+'%';
+  b.style.width=h.w+'%';
+  b.style.height=h.h+'%';
+  b.addEventListener('click',()=>openCard(h.n));
+  layer.appendChild(b);
+});
+
+function fitDialogToWidth(w){
+  const maxW=Math.min(720,innerWidth-32);
+  const wanted=Math.max(Math.min(w,maxW),Math.min(390,maxW));
+  modal.style.width=Math.round(wanted)+'px';
+}
+
+function renderMedia(h){
+  media.innerHTML='';
+  frame.classList.remove('tall');
+
+  if(h.crop){
+    const c=h.crop;
+    const displayW=Math.min(c.w,720,innerWidth-32);
+    const displayH=displayW*c.h/c.w;
+
+    const wrap=document.createElement('div');
+    wrap.className='crop-wrap';
+    wrap.style.width=displayW+'px';
+    wrap.style.height=displayH+'px';
+
+    const img=document.createElement('img');
+    img.src=h.src;
+    img.alt=TITLES[h.n] || '';
+
+    const scale=displayW/c.w;
+    img.style.width=(c.sw*scale)+'px';
+    img.style.left=(-c.x*scale)+'px';
+    img.style.top=(-c.y*scale)+'px';
+
+    wrap.appendChild(img);
+    media.appendChild(wrap);
+    fitDialogToWidth(displayW);
+    return;
+  }
+
+  const img=document.createElement('img');
+  img.className='direct-photo';
+  img.src=h.src;
+  img.alt=TITLES[h.n] || '';
+
+  img.onload=()=>{
+    const natW=img.naturalWidth || 720;
+    const natH=img.naturalHeight || 480;
+
+    // Never upscale above the source — preserves the fix the user approved.
+    const maxW=Math.min(720,innerWidth-32,natW);
+    const maxH=innerHeight*.66;
+    let w=maxW;
+    if(natH*(w/natW)>maxH) w=natW*(maxH/natH);
+
+    w=Math.max(1,Math.min(w,natW));
+    img.style.width=Math.round(w)+'px';
+    img.style.height='auto';
+
+    frame.classList.toggle('tall',natW/natH<0.55);
+    fitDialogToWidth(w);
+    img.classList.add('ready');
+  };
+
+  media.appendChild(img);
+}
+
+function openCard(n){
+  current=n;
+  const h=items.find(x=>x.n===n);
+  if(!h) return;
+
+  elTitle.textContent=TITLES[n] || '';
+  elText.textContent=(DESCRIPTIONS[n] || '').trim();
+  renderMedia(h);
+
+  if(!modal.open) modal.showModal();
+}
+
+function step(d){
+  openCard(((current-1+d+TOTAL)%TOTAL)+1);
+}
+
+document.getElementById('prev').onclick=()=>step(-1);
+document.getElementById('next').onclick=()=>step(1);
+document.getElementById('close').onclick=()=>modal.close();
+
+modal.addEventListener('keydown',e=>{
+  if(e.key==='ArrowLeft') step(-1);
+  if(e.key==='ArrowRight') step(1);
+});
+
+document.getElementById('help').onclick=()=>helpBox.showModal();
+document.getElementById('help-close').onclick=()=>helpBox.close();
+
+[modal,helpBox].forEach(d=>{
+  d.addEventListener('click',e=>{
+    if(e.target===d) d.close();
+  });
+});
+</script>
+</body>
+</html>
