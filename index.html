@@ -23,7 +23,16 @@ html,body{margin:0;min-height:100%}
 body{
   font-family:"Caveat","Segoe Script",cursive;
   color:#fff;
-  background:#596A73;
+  /* painted-wall backdrop: fine grain + broad roller unevenness over the base
+     colour. Both layers are neutral grey averaging ~50%, blended in soft-light,
+     so the palette is unchanged -- only the surface reads as textured. */
+  background-color:#596A73;
+  background-image:
+    url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20width='200'%20height='200'><filter%20id='n'%20x='0'%20y='0'%20width='100%25'%20height='100%25'%20color-interpolation-filters='sRGB'><feTurbulence%20type='fractalNoise'%20baseFrequency='0.9'%20numOctaves='4'%20stitchTiles='stitch'/><feColorMatrix%20type='saturate'%20values='0'/><feComponentTransfer><feFuncR%20type='linear'%20slope='0.45'%20intercept='0.275'/><feFuncG%20type='linear'%20slope='0.45'%20intercept='0.275'/><feFuncB%20type='linear'%20slope='0.45'%20intercept='0.275'/><feFuncA%20type='linear'%20slope='0'%20intercept='1'/></feComponentTransfer></filter><rect%20width='100%25'%20height='100%25'%20filter='url%28%23n%29'/></svg>"),
+    url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20width='700'%20height='700'><filter%20id='n'%20x='0'%20y='0'%20width='100%25'%20height='100%25'%20color-interpolation-filters='sRGB'><feTurbulence%20type='fractalNoise'%20baseFrequency='0.016'%20numOctaves='3'%20stitchTiles='stitch'/><feColorMatrix%20type='saturate'%20values='0'/><feComponentTransfer><feFuncR%20type='linear'%20slope='0.1'%20intercept='0.45'/><feFuncG%20type='linear'%20slope='0.1'%20intercept='0.45'/><feFuncB%20type='linear'%20slope='0.1'%20intercept='0.45'/><feFuncA%20type='linear'%20slope='0'%20intercept='1'/></feComponentTransfer></filter><rect%20width='100%25'%20height='100%25'%20filter='url%28%23n%29'/></svg>");
+  background-size:200px 200px,700px 700px;
+  background-repeat:repeat,repeat;
+  background-blend-mode:soft-light,soft-light;
   -webkit-font-smoothing:antialiased;
 }
 .page{
