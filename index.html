@@ -29,9 +29,14 @@ body{
 .page{
   width:min(1180px,100%);
   margin:0 auto;
-  padding:26px 20px 44px;
+  padding:22px 20px 26px;
+  height:100vh;
+  height:100dvh;
+  display:flex;
+  flex-direction:column;
 }
 header{
+  flex:0 0 auto;
   position:relative;
   text-align:center;
   padding:0 58px 10px;
@@ -66,15 +71,25 @@ h1{
 }
 .help-btn:hover{background:rgba(255,255,255,.22)}
 
+.board-slot{
+  flex:1 1 auto;
+  min-height:0;
+  margin:4px 0 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
 .board-wrap{
   position:relative;
-  width:100%;
-  margin:4px auto 0;
+  aspect-ratio:1598/1377;
+  width:min(100%, calc((100vh - 270px) * 1598 / 1377));
+  width:min(100%, calc((100dvh - 270px) * 1598 / 1377));
   line-height:0;
   filter:drop-shadow(0 18px 24px rgba(24,16,9,.32));
 }
 .board-wrap>img{
-  display:block;width:100%;height:auto;
+  display:block;
+  width:100%;height:100%;
 }
 .hotspots{position:absolute;inset:0;pointer-events:none}
 .hotspot{
@@ -86,8 +101,9 @@ h1{
 .hotspot:focus-visible{outline:3px solid #fff;outline-offset:2px}
 
 .tagline{
+  flex:0 0 auto;
   max-width:920px;
-  margin:4px auto 0;
+  margin:14px auto 0;
   text-align:center;
   color:#fff;
   font-size:clamp(27px,3.5vw,42px);
@@ -208,12 +224,13 @@ dialog::backdrop{background:rgba(10,8,6,.65);backdrop-filter:blur(2px)}
 @media(max-width:700px){
   .page{
     padding:18px 8px 24px;
+    height:auto;
     min-height:100vh;
     min-height:100dvh;
-    display:flex;
-    flex-direction:column;
     justify-content:center;
   }
+  .board-slot{flex:0 0 auto}
+  .board-wrap{width:100%}
   header{padding-inline:48px}
   .help-btn{right:5px}
   .tagline{padding-inline:12px;margin-top:14px}
@@ -246,9 +263,11 @@ kbd{
     <button class="help-btn" id="help-open" aria-label="О доске">?</button>
   </header>
 
-  <div class="board-wrap">
-    <img src="board.png?v=20260829-text13only1" alt="Отрядный уголок «Голубая лагуна»">
-    <div class="hotspots" id="hotspots"></div>
+  <div class="board-slot">
+    <div class="board-wrap">
+      <img src="board.png?v=20260829-text13only1" alt="Отрядный уголок «Голубая лагуна»">
+      <div class="hotspots" id="hotspots"></div>
+    </div>
   </div>
 
   <p class="tagline">
@@ -360,6 +379,27 @@ modal.addEventListener("keydown",e=>{
   if(e.key==="ArrowRight") openByIndex(currentIndex+1);
 });
 modal.addEventListener("click",e=>{if(e.target===modal)modal.close()});
+
+const slot=document.querySelector(".board-slot");
+const wrap=document.querySelector(".board-wrap");
+const BOARD_RATIO=1598/1377;
+const desktop=matchMedia("(min-width:701px)");
+
+let appliedWidth="";
+function fitBoard(){
+  // slot height is whatever the header and tagline leave over
+  const w=desktop.matches
+    ? Math.floor(Math.min(slot.clientWidth, slot.clientHeight*BOARD_RATIO))+"px"
+    : "";
+  if(w===appliedWidth) return;
+  appliedWidth=w;
+  wrap.style.width=w;
+}
+fitBoard();
+addEventListener("resize",fitBoard);
+desktop.addEventListener("change",fitBoard);
+if(window.ResizeObserver) new ResizeObserver(fitBoard).observe(slot);
+if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fitBoard);
 
 const help=document.getElementById("help-box");
 document.getElementById("help-open").onclick=()=>help.showModal();
